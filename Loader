@@ -1,0 +1,30 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
+
+local Window = Library:NewWindow("BLUE LOCK BY NEVAN")
+local MainSection = Window:NewSection("MAIN")
+local WalkspeedSection = Window:NewSection("WALKSPEED")
+
+-- Hitbox Bola
+MainSection:CreateButton("Hitbox Bola", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/YOUR_HITBOX_SCRIPT"))()
+end)
+
+-- Infinite Stamina
+MainSection:CreateButton("Inf Stamina", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/YOUR_INF_STAMINA_SCRIPT"))()
+end)
+
+-- Walkspeed 35
+WalkspeedSection:CreateButton("Walkspeed 35", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/YOUR_WALKSPEED_SCRIPT"))()
+end)
+
+-- FREE COSMETIC
+MainSection:CreateButton("FREE COSMETIC", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/YOUR_FREE_COSMETIC_SCRIPT"))()
+end)
+
+-- SC KIPER
+MainSection:CreateButton("SC KIPER", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/YOUR_SC_KIPER_SCRIPT"))()
+end)
