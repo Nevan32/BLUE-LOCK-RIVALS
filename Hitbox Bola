@@ -1,3 +1,9 @@
+game.StarterGui:SetCore("SendNotification", {
+    Title = "DONE";
+    Text = "HITBOX BOLA SUDAH AKTIF";
+    Duration = 5; -- Notif muncul selama 5 detik
+})
+
 local function ensureHitboxProperties(hitbox)
     if hitbox and hitbox:IsA("BasePart") then
         local function checkProperties()
