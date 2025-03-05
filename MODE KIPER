@@ -1,0 +1,118 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+local rootPart = character:WaitForChild("HumanoidRootPart")
+local ball = game.Workspace:WaitForChild("Football")
+
+-- Define Goal Boxes
+local homeBox = game.Workspace.AI.Home.DiveBox
+local awayBox = game.Workspace.AI.Away.DiveBox
+local originalBallSize = ball.Size  
+
+-- Create GUI
+local gui = Instance.new("ScreenGui")
+gui.Parent = player:WaitForChild("PlayerGui")
+
+-- Toggle Button
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 150, 0, 50)
+button.Position = UDim2.new(0, 0, 0, 0)
+button.Text = "GK Mode: OFF"
+button.Parent = gui
+
+-- GK Mode Variables
+local gkMode = false
+local gkLoop = nil
+
+-- Get Player's Team
+local function getTeam()
+    if player.Team and player.Team.Name == "Home" then
+        return "Home", homeBox
+    elseif player.Team and player.Team.Name == "Away" then
+        return "Away", awayBox
+    else
+        return nil, nil
+    end
+end
+
+-- **Diving Function**
+local function dive(direction)
+    if direction == "Left" then
+        game:GetService("ReplicatedStorage").Controllers.AnimatonController.DiveL:Fire()
+    elseif direction == "Right" then
+        game:GetService("ReplicatedStorage").Controllers.AnimatonController.DiveR:Fire()
+    elseif direction == "Forward" then
+        game:GetService("ReplicatedStorage").Controllers.AnimatonController.DiveF:Fire()
+    end
+end
+
+-- **Increase Ball Hitbox**
+local function modifyHitbox(enable)
+    if enable then
+        ball.Size = Vector3.new(originalBallSize.X * 4, originalBallSize.Y * 4, originalBallSize.Z * 4) -- **4x Bigger**
+    else
+        ball.Size = originalBallSize -- Reset to normal size
+    end
+end
+
+-- **Main GK Function**
+local function autoGK()
+    while gkMode do
+        if not character or not character.Parent then
+            character = player.Character or player.CharacterAdded:Wait()
+            humanoid = character:WaitForChild("Humanoid")
+            rootPart = character:WaitForChild("HumanoidRootPart")
+        end
+
+        if not ball or not ball.Parent then
+            ball = game.Workspace:WaitForChild("Football")
+        end
+
+        local team, diveBox = getTeam()
+        if team and diveBox and ball then
+            local ballPos = ball.Position
+            local boxPos = diveBox.Position
+            local distance = (ballPos - boxPos).Magnitude
+
+            -- **Stop Ball if it's about to enter the goal**
+            if distance < 15 then
+                ball.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                ball.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+            end
+            
+            -- **Teleport to intercept & dive instantly**
+            if distance < 25 then
+                rootPart.Position = Vector3.new(ballPos.X, rootPart.Position.Y, boxPos.Z)  -- Move to block the shot
+                
+                -- **Decide which way to dive based on ball direction**
+                local ballDirection = ball.AssemblyLinearVelocity
+                if math.abs(ballDirection.X) > math.abs(ballDirection.Z) then
+                    if ballDirection.X > 0 then
+                        dive("Right")
+                    else
+                        dive("Left")
+                    end
+                else
+                    dive("Forward")
+                end
+            end
+        end
+        task.wait(0.01) -- **Ultra-fast reaction time**
+    end
+end
+
+-- **Button Click Event**
+button.MouseButton1Click:Connect(function()
+    gkMode = not gkMode
+    button.Text = gkMode and "GK Mode: ON" or "GK Mode: OFF"
+
+    if gkMode then
+        gkLoop = task.spawn(autoGK)
+        modifyHitbox(true)  -- **Bigger hitbox**
+    else
+        if gkLoop then
+            task.cancel(gkLoop)
+        end
+        modifyHitbox(false)  -- **Reset hitbox**
+    end
+end)
