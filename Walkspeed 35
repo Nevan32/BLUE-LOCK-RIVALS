@@ -1,0 +1,36 @@
+local desiredSpeed = 35
+
+    local function maintainWalkSpeed(character)
+        local humanoid = character:FindFirstChildOfClass("Humanoid")
+
+        if humanoid then
+            humanoid.WalkSpeed = desiredSpeed
+
+            -- Pastikan setiap kali WalkSpeed berubah, dikembalikan ke nilai yang diinginkan
+            humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function()
+                if humanoid and humanoid.Parent and humanoid.WalkSpeed ~= desiredSpeed then
+                    humanoid.WalkSpeed = desiredSpeed
+                end
+            end)
+        end
+    end
+
+    -- Event saat pemain bergabung ke game
+    game.Players.PlayerAdded:Connect(function(player)
+        player.CharacterAdded:Connect(function(character)
+            task.wait(0.1) 
+            maintainWalkSpeed(character)
+        end)
+    end)
+
+    -- Jika pemain sudah ada dalam game saat script mulai
+    for _, player in pairs(game.Players:GetPlayers()) do
+        if player.Character then
+            task.wait(0.1)
+            maintainWalkSpeed(player.Character)
+        end
+        player.CharacterAdded:Connect(function(character)
+            task.wait(0.1)
+            maintainWalkSpeed(character)
+        end)
+    end
