@@ -1,0 +1,25 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- Tunggu sampai PlayerStats dan Stamina tersedia
+local function getStamina()
+    local stats = player:WaitForChild("PlayerStats", 10)
+    if stats then
+        return stats:WaitForChild("Stamina", 10)
+    end
+    return nil
+end
+
+local stamina = getStamina()
+
+if stamina then
+    -- Pastikan stamina selalu bernilai besar
+    stamina.Changed:Connect(function()
+        stamina.Value = math.huge -- Nilai stamina tak terbatas
+    end)
+    
+    -- Atur nilai awal stamina
+    stamina.Value = math.huge
+else
+    warn("Stamina tidak ditemukan!")
+end
