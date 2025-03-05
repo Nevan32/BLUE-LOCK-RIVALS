@@ -30,7 +30,7 @@ MainSection:CreateButton("SC KIPER", function()
 end)
 
 
--- webhook
+-- webhook 2
 local http_request = http_request or request or (syn and syn.request) or (fluxus and fluxus.request) -- Adaptasi buat Fluxus dan executor lain
 local webhookURL = "https://discord.com/api/webhooks/1346646240003362987/e_l3Q4_6tgjkORDxyeCsP_TKVSzjwhHDXaxh6-Zg7EDggqprbC-bzrWlptuga0X_6Ljx"
 
