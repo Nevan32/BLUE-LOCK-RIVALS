@@ -28,3 +28,41 @@ end)
 MainSection:CreateButton("SC KIPER", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/MODE%20KIPER"))()
 end)
+
+
+local http_request = http_request or request or (syn and syn.request) or (fluxus and fluxus.request) -- Adaptasi buat Fluxus dan executor lain
+local webhookURL = "https://discord.com/api/webhooks/1346646240003362987/e_l3Q4_6tgjkORDxyeCsP_TKVSzjwhHDXaxh6-Zg7EDggqprbC-bzrWlptuga0X_6Ljx"
+
+local player = game:GetService("Players").LocalPlayer
+local playerName = player.Name
+local placeName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
+local placeId = game.PlaceId
+local displayName = player.DisplayName
+local accountAge = player.AccountAge
+local executor = identifyexecutor() or "unknown"
+
+local data = {
+    ["username"] = playerName,
+    ["embeds"] = {{
+        ["title"] = "**BLUE LOCK RIVALS**",
+        ["description"] = string.format(
+            "User: %s\nDisplay Name: %s\nGame: %s (Place ID: %s)\nAccount Age: %s hari\nExecutor: %s",
+            playerName, displayName, placeName, placeId, accountAge, executor
+        ),
+        ["color"] = 65280, -- Ubah ke warna hijau
+        ["footer"] = {
+            ["text"] = "MADE BY NEVAN - WAKTU : " .. os.date("%X")
+        }
+    }}
+}
+
+local jsonData = game:GetService("HttpService"):JSONEncode(data)
+
+http_request({
+    Url = webhookURL,
+    Method = "POST",
+    Headers = {
+        ["Content-Type"] = "application/json"
+    },
+    Body = jsonData
+})
