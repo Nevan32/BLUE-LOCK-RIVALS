@@ -6,25 +6,25 @@ local WalkspeedSection = Window:NewSection("WALKSPEED")
 
 -- Hitbox Bola
 MainSection:CreateButton("Hitbox Bola", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/YOUR_HITBOX_SCRIPT"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/Hitbox%20Bola"))()
 end)
 
 -- Infinite Stamina
 MainSection:CreateButton("Inf Stamina", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/YOUR_INF_STAMINA_SCRIPT"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/Inf%20Stamina"))()
 end)
 
 -- Walkspeed 35
 WalkspeedSection:CreateButton("Walkspeed 35", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/YOUR_WALKSPEED_SCRIPT"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/Walkspeed%2035"))()
 end)
 
 -- FREE COSMETIC
 MainSection:CreateButton("FREE COSMETIC", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/YOUR_FREE_COSMETIC_SCRIPT"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/Cosmetic%20%26%20Goal%20Effect"))()
 end)
 
 -- SC KIPER
 MainSection:CreateButton("SC KIPER", function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/YOUR_SC_KIPER_SCRIPT"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/MODE%20KIPER"))()
 end)
