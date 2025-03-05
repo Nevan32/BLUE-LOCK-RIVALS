@@ -2,7 +2,7 @@ local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/blood
 
 local Window = Library:NewWindow("BLUE LOCK BY NEVAN")
 local MainSection = Window:NewSection("MAIN")
-local WalkspeedSection = Window:NewSection("WALKSPEED")
+local WalkspeedSection = Window:NewSection("WALKSPEED PERMANENT")
 
 -- Hitbox Bola
 MainSection:CreateButton("Hitbox Bola", function()
