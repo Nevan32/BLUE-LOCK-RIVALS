@@ -97,7 +97,7 @@ Frame.Visible = false -- Awalnya tersembunyi, hanya muncul saat ToggleButton dit
 
 -- Title
 Title.Parent = Frame
-Title.Text = "Legit Auto Dribble"
+Title.Text = "Auto Dribble"
 Title.Size = UDim2.new(1, 0, 0, 30)
 Title.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 Title.TextColor3 = Color3.fromRGB(255, 255, 255)
