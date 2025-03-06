@@ -15,6 +15,10 @@ MainSection:CreateButton("Inf Stamina", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/Inf%20Stamina"))()
 end)
 
+MainSection:CreateButton("Auto Dribble", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/Auto%20Dribble"))()
+end)
+
 -- Walkspeed 35
 WalkspeedSection:CreateButton("Walkspeed 35", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/Walkspeed%2035"))()
