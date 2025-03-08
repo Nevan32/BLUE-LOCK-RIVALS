@@ -40,15 +40,25 @@ local awayBox = game.Workspace.AI.Away.DiveBox
 local originalBallSize = ball.Size  
 
 -- Create GUI
-local gui = Instance.new("ScreenGui")
-gui.Parent = player:WaitForChild("PlayerGui")
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
 
--- Toggle Button
+-- Buat GUI
+local gui = Instance.new("ScreenGui")
+gui.ResetOnSpawn = false -- Supaya tidak hilang saat respawn
+gui.Parent = playerGui
+
+-- Tombol Toggle
 local button = Instance.new("TextButton")
 button.Size = UDim2.new(0, 150, 0, 50)
 button.Position = UDim2.new(0, 0, 0, 0)
 button.Text = "GK Mode: OFF"
 button.Parent = gui
+
+-- **Event saat karakter respawn**
+player.CharacterAdded:Connect(function()
+    gui.Parent = player:WaitForChild("PlayerGui") -- Pastikan GUI tetap ada setelah respawn
+end)
 
 -- GK Mode Variables
 local gkMode = false
