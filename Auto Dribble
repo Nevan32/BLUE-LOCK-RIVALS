@@ -63,110 +63,171 @@ local OnLabel = Instance.new("TextLabel") -- Green "ON" Label
 
 -- Parent GUI to PlayerGui
 -- GUI Code
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.ResetOnSpawn = false -- Agar GUI tidak hilang saat respawn
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
 
-local ToggleButton = Instance.new("TextButton") -- Tombol untuk menampilkan/sembunyikan GUI
-local Frame = Instance.new("Frame")
-local Title = Instance.new("TextLabel")
-local RangeLabel = Instance.new("TextLabel")
-local RangeInput = Instance.new("TextBox")
-local AutoDribbleToggle = Instance.new("TextButton") -- Tombol ON/OFF Auto Dribble
+-- Membuat ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+screenGui.ResetOnSpawn = false
 
--- Parent GUI to PlayerGui
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+-- Membuat tombol Toggle GUI
+local toggleButton = Instance.new("TextButton")
+toggleButton.Parent = screenGui
+toggleButton.Position = UDim2.new(0.05, 0, 0.1, 0)
+toggleButton.Size = UDim2.new(0, 130, 0, 40)
+toggleButton.Text = "Open Menu"
+toggleButton.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+toggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggleButton.Font = Enum.Font.GothamBold
+toggleButton.TextSize = 16
+toggleButton.BorderSizePixel = 2
+toggleButton.BorderColor3 = Color3.fromRGB(255, 215, 0)
 
--- Toggle Button (Buka/Tutup GUI)
-ToggleButton.Parent = ScreenGui
-ToggleButton.Position = UDim2.new(0, 10, 0, 50)
-ToggleButton.Size = UDim2.new(0, 100, 0, 30)
-ToggleButton.Text = "Show GUI"
-ToggleButton.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-ToggleButton.Font = Enum.Font.SourceSansBold
-ToggleButton.TextSize = 16
+-- Membuat Frame utama
+local mainFrame = Instance.new("Frame")
+mainFrame.Parent = screenGui
+mainFrame.Position = UDim2.new(0.5, -125, 0.3, 0)
+mainFrame.Size = UDim2.new(0, 250, 0, 200)
+mainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+mainFrame.BorderSizePixel = 3
+mainFrame.BorderColor3 = Color3.fromRGB(255, 215, 0)
+mainFrame.Visible = false
+mainFrame.ClipsDescendants = true
+mainFrame.Active = true -- Untuk drag
+mainFrame.Draggable = true -- Aktifkan drag untuk PC
 
--- Frame Properties (Panel utama GUI)
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
-Frame.Size = UDim2.new(0, 200, 0, 140)
-Frame.Position = UDim2.new(0, 50, 0, 100)
-Frame.BorderSizePixel = 2
-Frame.BorderColor3 = Color3.fromRGB(255, 255, 255)
-Frame.Visible = false -- Awalnya tersembunyi, hanya muncul saat ToggleButton ditekan
+-- Membuat sudut membulat
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0, 10)
+frameCorner.Parent = mainFrame
 
--- Title
-Title.Parent = Frame
-Title.Text = "Auto Dribble"
-Title.Size = UDim2.new(1, 0, 0, 30)
-Title.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.Font = Enum.Font.SourceSansBold
-Title.TextSize = 18
+-- Membuat teks "Made By Nevan"
+local madeByLabel = Instance.new("TextLabel")
+madeByLabel.Parent = mainFrame
+madeByLabel.Size = UDim2.new(1, 0, 0, 20)
+madeByLabel.Position = UDim2.new(0, 0, 0, 5)
+madeByLabel.Text = "Made By Nevan"
+madeByLabel.BackgroundTransparency = 1
+madeByLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+madeByLabel.Font = Enum.Font.GothamBold
+madeByLabel.TextSize = 14
 
--- Range Label
-RangeLabel.Parent = Frame
-RangeLabel.Position = UDim2.new(0, 10, 0, 40)
-RangeLabel.Size = UDim2.new(0, 180, 0, 20)
-RangeLabel.Text = "Range: " .. tostring(S.range)
-RangeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-RangeLabel.BackgroundTransparency = 1
-RangeLabel.Font = Enum.Font.SourceSansBold
-RangeLabel.TextSize = 16
+-- Membuat judul
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Parent = mainFrame
+titleLabel.Size = UDim2.new(1, 0, 0, 40)
+titleLabel.Position = UDim2.new(0, 0, 0, 25)
+titleLabel.Text = "AUTO DRIBBLE"
+titleLabel.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+titleLabel.TextColor3 = Color3.fromRGB(255, 215, 0)
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.TextSize = 20
 
--- Range Input
-RangeInput.Parent = Frame
-RangeInput.Position = UDim2.new(0, 10, 0, 60)
-RangeInput.Size = UDim2.new(0, 180, 0, 30)
-RangeInput.Text = tostring(S.range)
-RangeInput.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-RangeInput.TextColor3 = Color3.fromRGB(255, 255, 255)
-RangeInput.Font = Enum.Font.SourceSansBold
-RangeInput.TextSize = 18
-RangeInput.ClearTextOnFocus = false
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 10)
+titleCorner.Parent = titleLabel
 
--- Auto Dribble Toggle (ON/OFF)
-AutoDribbleToggle.Parent = Frame
-AutoDribbleToggle.Position = UDim2.new(0, 10, 0, 100)
-AutoDribbleToggle.Size = UDim2.new(0, 180, 0, 30)
-AutoDribbleToggle.Font = Enum.Font.SourceSansBold
-AutoDribbleToggle.TextSize = 18
+-- Membuat label dan input range
+local rangeLabel = Instance.new("TextLabel")
+rangeLabel.Parent = mainFrame
+rangeLabel.Position = UDim2.new(0, 10, 0, 70)
+rangeLabel.Size = UDim2.new(0, 230, 0, 25)
+rangeLabel.Text = "Dribble Range: 22"
+rangeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+rangeLabel.BackgroundTransparency = 1
+rangeLabel.Font = Enum.Font.Gotham
+rangeLabel.TextSize = 16
 
--- Fungsi untuk memperbarui tampilan tombol ON/OFF
+local rangeInput = Instance.new("TextBox")
+rangeInput.Parent = mainFrame
+rangeInput.Position = UDim2.new(0, 10, 0, 100)
+rangeInput.Size = UDim2.new(0, 230, 0, 35)
+rangeInput.Text = "22"
+rangeInput.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+rangeInput.TextColor3 = Color3.fromRGB(255, 255, 255)
+rangeInput.Font = Enum.Font.Gotham
+rangeInput.TextSize = 18
+rangeInput.ClearTextOnFocus = false
+rangeInput.BorderSizePixel = 2
+rangeInput.BorderColor3 = Color3.fromRGB(255, 215, 0)
+
+local inputCorner = Instance.new("UICorner")
+inputCorner.CornerRadius = UDim.new(0, 8)
+inputCorner.Parent = rangeInput
+
+-- Tombol Auto Dribble
+local autoDribbleButton = Instance.new("TextButton")
+autoDribbleButton.Parent = mainFrame
+autoDribbleButton.Position = UDim2.new(0, 10, 0, 145)
+autoDribbleButton.Size = UDim2.new(0, 230, 0, 35)
+autoDribbleButton.Font = Enum.Font.GothamBold
+autoDribbleButton.TextSize = 18
+autoDribbleButton.BorderSizePixel = 2
+autoDribbleButton.BorderColor3 = Color3.fromRGB(255, 215, 0)
+
+local buttonCorner = Instance.new("UICorner")
+buttonCorner.CornerRadius = UDim.new(0, 8)
+buttonCorner.Parent = autoDribbleButton
+
+local autoDribbleEnabled = true
+
 local function updateAutoDribbleButton()
-    if S.Enabled then
-        AutoDribbleToggle.Text = "Auto Dribble: ON"
-        AutoDribbleToggle.TextColor3 = Color3.fromRGB(0, 255, 0) -- Hijau jika aktif
-        AutoDribbleToggle.BackgroundColor3 = Color3.fromRGB(30, 100, 30)
+    if autoDribbleEnabled then
+        autoDribbleButton.Text = "AUTO DRIBBLE: ON"
+        autoDribbleButton.TextColor3 = Color3.fromRGB(0, 255, 0)
+        autoDribbleButton.BackgroundColor3 = Color3.fromRGB(30, 100, 30)
     else
-        AutoDribbleToggle.Text = "Auto Dribble: OFF"
-        AutoDribbleToggle.TextColor3 = Color3.fromRGB(255, 0, 0) -- Merah jika nonaktif
-        AutoDribbleToggle.BackgroundColor3 = Color3.fromRGB(100, 30, 30)
+        autoDribbleButton.Text = "AUTO DRIBBLE: OFF"
+        autoDribbleButton.TextColor3 = Color3.fromRGB(255, 0, 0)
+        autoDribbleButton.BackgroundColor3 = Color3.fromRGB(100, 30, 30)
     end
 end
 
--- Inisialisasi tampilan tombol
 updateAutoDribbleButton()
 
--- Toggle Button Functionality (Untuk menampilkan/sembunyikan GUI)
-ToggleButton.MouseButton1Click:Connect(function()
-    Frame.Visible = not Frame.Visible
-    ToggleButton.Text = Frame.Visible and "Hide GUI" or "Show GUI"
+-- Toggle GUI
+toggleButton.MouseButton1Click:Connect(function()
+    mainFrame.Visible = not mainFrame.Visible
+    toggleButton.Text = mainFrame.Visible and "Close Menu" or "Open Menu"
 end)
 
--- Update Range on Input Change
-RangeInput.FocusLost:Connect(function()
-    local newRange = tonumber(RangeInput.Text)
+-- Ubah range
+rangeInput.FocusLost:Connect(function()
+    local newRange = tonumber(rangeInput.Text)
     if newRange and newRange > 0 then
-        S.range = newRange
-        RangeLabel.Text = "Range: " .. tostring(newRange)
+        rangeLabel.Text = "Dribble Range: " .. tostring(newRange)
     else
-        RangeInput.Text = tostring(S.range) -- Reset jika input tidak valid
+        rangeInput.Text = "22"
     end
 end)
 
--- Auto Dribble Toggle Functionality (ON/OFF)
-AutoDribbleToggle.MouseButton1Click:Connect(function()
-    S.Enabled = not S.Enabled -- Toggle status
-    updateAutoDribbleButton() -- Perbarui tampilan tombol
+-- Tombol Auto Dribble
+autoDribbleButton.MouseButton1Click:Connect(function()
+    autoDribbleEnabled = not autoDribbleEnabled
+    updateAutoDribbleButton()
+end)
+
+-- **Fitur Dragging untuk HP**
+local dragging = false
+local dragStart, startPos
+
+mainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainFrame.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+mainFrame.InputChanged:Connect(function(input)
+    if dragging and (input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseMovement) then
+        local delta = input.Position - dragStart
+        mainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
 end)
