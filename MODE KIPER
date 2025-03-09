@@ -31,7 +31,9 @@ http_request {
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 local ball = game.Workspace:WaitForChild("Football")
+local hitbox = ball:WaitForChild("Hitbox") -- Ambil Hitbox di dalam Football
 local originalBallSize = ball.Size  
+local originalHitboxSize = hitbox.Size -- Simpan ukuran awal Hitbox
 
 -- Buat GUI
 local gui = Instance.new("ScreenGui")
@@ -45,12 +47,14 @@ button.Position = UDim2.new(0, 0, 0, 0)
 button.Text = "Big Hitbox: OFF"
 button.Parent = gui
 
--- Fungsi untuk mengubah ukuran bola
+-- Fungsi untuk mengubah ukuran bola dan hitbox
 local function modifyHitbox(enable)
     if enable then
-        ball.Size = Vector3.new(originalBallSize.X * 4, originalBallSize.Y * 4, originalBallSize.Z * 4) -- 4x lebih besar
+        ball.Size = originalBallSize * 4 -- Perbesar bola 4x
+        hitbox.Size = originalHitboxSize * 4 -- Perbesar Hitbox 4x
     else
-        ball.Size = originalBallSize -- Kembali ke ukuran normal
+        ball.Size = originalBallSize -- Kembalikan ukuran bola
+        hitbox.Size = originalHitboxSize -- Kembalikan ukuran Hitbox
     end
 end
 
