@@ -4,44 +4,6 @@ local Window = Library:NewWindow("BLUE LOCK BY NEVAN")
 local MainSection = Window:NewSection("MAIN")
 local WalkspeedSection = Window:NewSection("WALKSPEED PERMANENT")
 local BahayaSection = Window:NewSection("Script Berbahaya")
-local PosisiSection = Window:NewSection("Auto Join Posisi")
-
--- Variabel untuk toggle Auto CF
-local autoCFHomeActive = false
-local autoCFAwayActive = false
-
--- Toggle UI untuk Auto CF HOME
-PosisiSection:CreateToggle("Auto CF HOME", function(value)
-    autoCFHomeActive = value
-end)
-
--- Toggle UI untuk Auto CF AWAY
-PosisiSection:CreateToggle("Auto CF AWAY", function(value)
-    autoCFAwayActive = value
-end)
-
--- Script utama menggunakan Heartbeat agar terus mengecek status tim
-local player = game.Players.LocalPlayer
-
-game:GetService("RunService").Heartbeat:Connect(function()
-    if autoCFHomeActive and player.Team and player.Team.Name == "Visitor" then
-        local args = {
-            [1] = "Home",
-            [2] = "CF"
-        }
-        game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit")
-            :WaitForChild("Services"):WaitForChild("TeamService"):WaitForChild("RE")
-            :WaitForChild("Select"):FireServer(unpack(args))
-    elseif autoCFAwayActive and player.Team and player.Team.Name == "Visitor" then
-        local args = {
-            [1] = "Away",
-            [2] = "CF"
-        }
-        game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Knit")
-            :WaitForChild("Services"):WaitForChild("TeamService"):WaitForChild("RE")
-            :WaitForChild("Select"):FireServer(unpack(args))
-    end
-end)
 
 -- Hitbox Bola
 MainSection:CreateButton("Hitbox Bola", function()
@@ -63,7 +25,7 @@ WalkspeedSection:CreateButton("Walkspeed 35", function()
 end)
 
 BahayaSection:CreateButton("No CD Style Skill", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/NO%20CD%20STYLE%20SKILL"))()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/NO%20CD%20STYLE%20SKILL"))()
 end)
 
 -- FREE COSMETIC
