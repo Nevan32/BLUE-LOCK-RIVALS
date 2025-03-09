@@ -50,7 +50,7 @@ button.Parent = gui
 -- Fungsi untuk mengubah ukuran bola dan hitbox
 local function modifyHitbox(enable)
     if enable then
-        ball.Size = originalBallSize * 4 -- Perbesar bola 4x
+        ball.Size = originalBallSize * 3 -- Perbesar bola 3x
         hitbox.Size = originalHitboxSize * 4 -- Perbesar Hitbox 4x
     else
         ball.Size = originalBallSize -- Kembalikan ukuran bola
