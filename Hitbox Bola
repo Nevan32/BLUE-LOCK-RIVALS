@@ -31,20 +31,16 @@ http_request {
 local function ensureHitboxProperties(hitbox)  
     if hitbox and hitbox:IsA("BasePart") then  
         local function checkProperties()  
-            -- Pastikan ukuran tetap 10, 10, 10  
             if hitbox.Size ~= Vector3.new(10, 10, 10) then  
                 hitbox.Size = Vector3.new(10, 10, 10)  
             end  
-            -- Pastikan transparansi tetap 0.8  
             if hitbox.Transparency ~= 0.8 then  
                 hitbox.Transparency = 0.8  
             end  
         end  
-  
-        -- Atur ukuran dan transparansi saat pertama kali ditemukan  
+
         checkProperties()  
-  
-        -- Pantau perubahan ukuran dan transparansi secara real-time  
+
         hitbox:GetPropertyChangedSignal("Size"):Connect(checkProperties)  
         hitbox:GetPropertyChangedSignal("Transparency"):Connect(checkProperties)  
     else  
@@ -59,62 +55,49 @@ local function handleFootball(football)
 
     local function waitForHitbox()  
         local hitbox  
-  
-        -- Menunggu hingga Hitbox muncul di dalam Football  
+
         repeat  
             hitbox = football:FindFirstChild("Hitbox")  
             if not hitbox then  
-                wait(1) -- Tunggu 1 detik sebelum cek lagi  
+                wait(1)  
             end  
         until hitbox and hitbox:IsA("BasePart")  
-  
+
         print("Hitbox ditemukan!")  
         ensureHitboxProperties(hitbox)  
     end  
 
-    -- Jika hitbox sudah ada, langsung atur propertinya  
     if football:FindFirstChild("Hitbox") then  
         ensureHitboxProperties(football.Hitbox)  
     else  
         waitForHitbox()  
     end  
 
-    -- Pantau jika ada anak baru di dalam Football  
     football.ChildAdded:Connect(function(child)  
         if child.Name == "Hitbox" and child:IsA("BasePart") then  
             ensureHitboxProperties(child)  
         end  
     end)  
 
-    -- Simpan ukuran asli bola  
-    local originalBallSize = football.Size    
+    football.Size = Vector3.new(3.102, 3.101, 3.139)  
 
-    -- Fungsi untuk memperbesar bola  
-    local function modifyHitbox(enable)  
-        if enable then  
-            football.Size = Vector3.new(originalBallSize.X * 2, originalBallSize.Y * 2, originalBallSize.Z * 2) -- 2x Lebih Besar  
-        else  
-            football.Size = originalBallSize -- Kembali ke ukuran normal  
-        end  
-    end  
-
-    -- Perbesar bola langsung saat script berjalan  
-    modifyHitbox(true)  
+    football.Destroying:Connect(function()
+        print("Football dihapus, menunggu yang baru...")
+    end)
 end
 
 local function waitForFootball()
-    while true do
-        local football = game.Workspace:FindFirstChild("Football")
-        if football then
-            handleFootball(football)
-
-            -- Tunggu sampai Football dihapus sebelum mencari ulang
-            football.Destroying:Wait()
-            print("Football dihapus, mencari ulang...")
+    game.Workspace.ChildAdded:Connect(function(child)
+        if child.Name == "Football" and child:IsA("BasePart") then
+            task.wait(1) 
+            handleFootball(child)
         end
-        wait(1) -- Cek setiap 1 detik
+    end)
+
+    local football = game.Workspace:FindFirstChild("Football")
+    if football then
+        handleFootball(football)
     end
 end
 
--- Jalankan loop untuk terus mencari Football
 task.spawn(waitForFootball)
