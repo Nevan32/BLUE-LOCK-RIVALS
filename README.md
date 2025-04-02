@@ -22,7 +22,7 @@ Welcome to **Roblox Script: Blue Lock**, a script designed to enhance your gamin
    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/Loader"))()
    ```
 2. **Open Roblox** and launch the **Blue Lock** game.
-3. **Use your favorite executor** (e.g., KRNL, Synapse X, Fluxus).
+3. **Use your favorite executor** (e.g., KRNL, Delta, Fluxus).
 4. **Paste the script and execute** it to enjoy all available features!
 
 ---
