@@ -1,8 +1,8 @@
-# ⚽ Roblox Script: Blue Lock : Rivals
+# ⚽ Roblox Script: Blue Lock: Rivals
 
 ### 🚀 Developed by **Nevan**
 
-Welcome to **Roblox Script: Blue Lock : Rivals**, a script designed to enhance your gaming experience with exclusive features. This script is **keyless**, so you can use it hassle-free!
+Welcome to **Roblox Script: Blue Lock: Rivals**, a script designed to enhance your gaming experience with exclusive features. This script is **keyless**, so you can use it hassle-free!
 
 ---
 
@@ -21,7 +21,7 @@ Welcome to **Roblox Script: Blue Lock : Rivals**, a script designed to enhance y
    ```lua
    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/Loader"))()
    ```
-2. **Open Roblox** and launch the **Blue Lock : Rivals** game.
+2. **Open Roblox** and launch the **Blue Lock: Rivals** game.
 3. **Use your favorite executor** (e.g., KRNL, Delta, Fluxus).
 4. **Paste the script and execute** it to enjoy all available features!
 
