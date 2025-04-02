@@ -32,5 +32,5 @@ Welcome to **Roblox Script: Blue Lock: Rivals**, a script designed to enhance yo
 
 ---
 
-🔥 Enjoy a more exciting gaming experience and enhance your performance with **Roblox Script: Blue Lock**! 🔥
+🔥 Enjoy a more exciting gaming experience and enhance your performance with **Roblox Script: Blue Lock: Rivals**! 🔥
 
