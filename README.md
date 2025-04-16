@@ -11,7 +11,6 @@ Welcome to **Roblox Script: Blue Lock: Rivals**, a script designed to enhance yo
 ✔️ **Hitbox Ball** – Expand the ball's hitbox for easier control.  
 ✔️ **Infinite Stamina** – Run endlessly without worrying about stamina!  
 ✔️ **No Cooldown Style Skill** – Use skills with no cooldown for maximum performance.  
-✔️ **Goalkeeper Mode** – For goalkeepers.  
 ✔️ **Walkspeed 35 (Permanent)** – Maintain a constant speed of 35 for an advantage in the game.  
 
 ---
