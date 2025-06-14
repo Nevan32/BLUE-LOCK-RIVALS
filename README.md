@@ -11,7 +11,7 @@ Welcome to **Roblox Script: Blue Lock: Rivals**, a script designed to enhance yo
 ✔️ **Hitbox Ball** – Expand the ball's hitbox for easier control.  
 ✔️ **Infinite Stamina** – Run endlessly without worrying about stamina!  
 ✔️ **No Cooldown Style Skill** – Use skills with no cooldown for maximum performance.  
-✔️ **Walkspeed 35 (Permanent)** – Maintain a constant speed of 35 for an advantage in the game.  
+✔️ **Walkspeed 35** – Maintain a constant speed of 35 for an advantage in the game.  
 
 ---
 
@@ -21,7 +21,7 @@ Welcome to **Roblox Script: Blue Lock: Rivals**, a script designed to enhance yo
    loadstring(game:HttpGet("https://raw.githubusercontent.com/Nevan32/BLUE-LOCK-RIVALS/refs/heads/main/Loader"))()
    ```
 2. **Open Roblox** and launch the **Blue Lock: Rivals** game.
-3. **Use your favorite executor** (e.g., KRNL, Delta, Fluxus).
+3. **Use your favorite executor** (e.g., Delta, Fluxus, Krnl).
 4. **Paste the script and execute** it to enjoy all available features!
 
 ---
